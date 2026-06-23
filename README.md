@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Inbox Triage Agent (Free, No Paid API)
 
 A decision-making AI agent project — a step up from the Research Agent.
@@ -82,3 +83,6 @@ triage_agent/
    `urgent_business`, trigger the Research Agent to look up context about
    the sender's company before escalating — this is your first taste of
    multi-agent systems.
+=======
+# AI-Agents
+>>>>>>> ea1aa5d15a2750033e0790b497655a484e8d7540
