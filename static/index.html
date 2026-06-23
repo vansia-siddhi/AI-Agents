@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inbox Triage Agent — AI Decision-Making Tool</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="badge"><span class="badge-dot"></span>Decision-Making AI Agent</div>
+    <h1>Watch an AI Agent <em>Classify & Decide</em><br>on Real Messages</h1>
+    <p class="subtitle">Unlike a chatbot that just replies, this agent reads each message, classifies it, decides an action with consequences, and drafts the right response — all on its own.</p>
+
+    <div class="loop-diagram">
+      <div class="loop-chip">🧠 Classify</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-chip">⚡ Decide</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-chip">📝 Act</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-chip">📋 Log</div>
+    </div>
+  </div>
+
+  <div class="setup-alert" id="setupAlert">
+    ⚠️ <strong>Server setup needed:</strong> <code>GROQ_API_KEY</code> isn't set on this server.
+    Get a free key at <strong>console.groq.com</strong>, then set it and restart the Flask app.
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" id="tabSample" onclick="switchTab('sample')">📥 Sample Inbox (5 messages)</button>
+    <button class="tab-btn" id="tabCustom" onclick="switchTab('custom')">✍️ Try Your Own Message</button>
+  </div>
+
+  <div class="tab-panel active" id="panelSample">
+    <div class="card">
+      <div class="field-label">Sample messages to triage</div>
+      <div class="inbox-preview" id="inboxPreview"></div>
+      <button class="btn-primary" id="runBtn" onclick="runTriage()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Run Agent on All 5 Messages
+      </button>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="panelCustom">
+    <div class="card">
+      <div class="field-label">Write your own message to triage</div>
+      <div class="form-field">
+        <label>From (email)</label>
+        <input type="text" class="form-input" id="customFrom" placeholder="customer@example.com" value="customer@example.com">
+      </div>
+      <div class="form-field">
+        <label>Subject</label>
+        <input type="text" class="form-input" id="customSubject" placeholder="e.g. Question about my order">
+      </div>
+      <div class="form-field">
+        <label>Message body</label>
+        <textarea class="form-textarea" id="customBody" placeholder="Type the message content here..."></textarea>
+      </div>
+      <button class="btn-primary" id="runCustomBtn" onclick="runCustomTriage()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Triage This Message
+      </button>
+    </div>
+  </div>
+
+  <div id="errorBox"></div>
+
+  <div id="feedSection">
+    <div class="feed-header">
+      <div class="feed-status-dot" id="statusDot"></div>
+      <div class="feed-title" id="feedTitle">Agent working...</div>
+    </div>
+    <div class="msg-results" id="msgResults"></div>
+
+    <div class="summary-card" id="summaryCard">
+      <div class="field-label" style="margin-bottom:0">Summary</div>
+      <div class="summary-grid" id="summaryGrid"></div>
+      <div class="action-bar">
+        <button class="btn-sec" onclick="downloadLog()">⬇️ Download Audit Log (.json)</button>
+        <button class="btn-sec" onclick="resetForm()">🔄 Run Again</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>🎓 Learning Note:</strong> This agent mixes LLM reasoning (classification, drafting replies) with plain Python if/else logic (the actual decision rule). Real production agents are built exactly like this — not every decision needs an AI call. Uses Groq's free API, no paid keys required.
+  </div>
+
+</div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
